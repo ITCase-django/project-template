@@ -1,0 +1,13 @@
+django-appconf
+django-filebrowser>=3.8,<3.9
+django-grappelli>=2.9,<2.10
+django-mptt
+django-mptt-admin
+django-redis>=4,<5
+django-tinymce-4
+django>=1.10,<1.11
+
+psycopg2
+pytils
+raven
+requests
