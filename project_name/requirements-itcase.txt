@@ -1,1 +1,1 @@
-# Put here list of ItCase Dev packages
+# Put here list of ITCase Dev packages

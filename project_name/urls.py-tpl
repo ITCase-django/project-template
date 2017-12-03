@@ -15,8 +15,9 @@
 # limitations under the License.
 
 from django.conf import settings
-from django.conf.urls import include, url
+from django.conf.urls import include, static, url
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 
 from filebrowser.sites import site as fb_site
@@ -34,15 +35,7 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='base.html')),
 ]
 
-if settings.DEBUG:
-    from django.views.static import serve
 
-    urlpatterns.append(
-        url(r'^media/(?P<path>.*)$', serve,
-            {'document_root': settings.MEDIA_ROOT}),
-    )
-    urlpatterns.append(
-        url(r'^static/(?P<path>.*)$', serve,
-            {'document_root': settings.STATIC_ROOT}),
-    )
-
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static.static(settings.MEDIA_URL,
+                             document_root=settings.MEDIA_ROOT)

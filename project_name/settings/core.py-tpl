@@ -41,15 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
 
-    'django_mptt_admin',
     'filebrowser',
     'grappelli.dashboard',
     'grappelli',
-    'mptt',
-
-    # ITCase
-    'common',
-    'pages',
 
     'django.contrib.admin',
 ]
@@ -90,7 +84,9 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
+        'HOST': '127.0.0.1',
         'NAME': PROJECT_NAME,
+        'PORT': 5432,
         'USER': PROJECT_NAME,
     }
 }
@@ -124,6 +120,7 @@ USE_I18N = True
 # A boolean that specifies if localized formatting of data will be enabled.
 USE_L10N = True
 THOUSAND_SEPARATOR = ' '
+USE_THOUSAND_SEPARATOR = True
 
 # Controls where Django stores session data.
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
@@ -132,4 +129,3 @@ SESSION_CACHE_ALIAS = 'session'
 
 # The ID, as an integer, of the current site in the django_site database table.
 SITE_ID = 1
-

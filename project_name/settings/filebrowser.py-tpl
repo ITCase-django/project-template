@@ -78,4 +78,3 @@ FILEBROWSER_DIRECTORY = 'uploads/'
 
 # Max upload size in bytes
 FILEBROWSER_MAX_UPLOAD_SIZE = 10485760
-

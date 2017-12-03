@@ -17,6 +17,4 @@
 PROJECT_NAME = '{{ project_name }}'
 
 # ITCase
-PAGES_CHECK_PAGE_LANGUAGE = False
-PAGES_REGISTER_BANNER = False
-
+# Put bellow options for ITCase Dev packages

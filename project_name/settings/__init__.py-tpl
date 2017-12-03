@@ -19,16 +19,15 @@ import os
 BASE_DIR = os.path.join(os.path.dirname(__file__), os.pardir)
 BASE_DIR = os.path.abspath(BASE_DIR)
 
-from .cache import CACHES
-from .core import *
-from .logging import LOGGING
-from .static import *
+from .cache import CACHES  # noqa
+from .core import *  # noqa
+from .logging import LOGGING  # noqa
+from .static import *  # noqa
 
-from .filebrowser import *
-from .grappelli import *
-from .sentry import RAVEN_CONFIG
+from .filebrowser import *  # noqa
+from .grappelli import *  # noqa
+from .sentry import RAVEN_CONFIG  # noqa
 
-from .project import *
+from .project import *  # noqa
 
-from .local import *
-
+from .local import *  # noqa

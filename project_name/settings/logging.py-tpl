@@ -20,7 +20,6 @@ from django.utils.log import DEFAULT_LOGGING
 
 LOGGING = deepcopy(DEFAULT_LOGGING)
 
-
 # ****************************************************************
 # DJANGO
 
@@ -57,7 +56,6 @@ LOGGING['loggers']['management_commands'] = {
     'propagate': False,
 }
 
-
 # ****************************************************************
 # THIRD-PARTY
 
@@ -73,4 +71,3 @@ LOGGING['handlers']['sentry'] = {
     'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
     'filters': ['require_debug_false'],
 }
-
