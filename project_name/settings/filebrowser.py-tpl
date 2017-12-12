@@ -50,7 +50,7 @@ FILEBROWSER_VERSIONS = {
 FILEBROWSER_ADMIN_VERSIONS = ['thumbnail', 'small', 'medium', 'big', 'large']
 
 # The version being used as the admin thumbnail
-FILEBROWSER_ADMIN_THUMBNAIL = ['admin_thumbnail']
+FILEBROWSER_ADMIN_THUMBNAIL = 'admin_thumbnail'
 
 # Allowed extensions for file upload
 FILEBROWSER_EXTENSIONS = {
