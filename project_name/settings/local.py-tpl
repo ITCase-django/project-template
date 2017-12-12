@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright 2017 Petr Zelenin (po.zelenin@gmail.com)
+# Copyright 2017 ITCase (info@itcase.pro)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,21 +17,17 @@
 import socket
 
 from .cache import CACHES
-from .core import DATABASES, INSTALLED_APPS, TEMPLATES
+from .core import DATABASES, INSTALLED_APPS, SESSION_CACHE_ALIAS, TEMPLATES
+from .project import PROJECT_NAME
 from .static import STATIC_ROOT, STATICFILES_DIRS
-
-try:
-    from .core import SESSION_CACHE_ALIAS
-except ImportError:
-    SESSION_CACHE_ALIAS = None
 
 # ****************************************************************
 # DJANGO
 
 # CACHES
 CACHE_MIDDLEWARE_SECONDS = 1
-for cache in CACHES:
-    CACHES[cache]['LOCATION'] = 'redis://redis:6379/0'
+for index, cache in enumerate(CACHES):
+    CACHES[cache]['LOCATION'] = 'redis://redis:6379/%s' % index
 
     if cache == SESSION_CACHE_ALIAS:
         continue
@@ -41,12 +37,15 @@ for cache in CACHES:
 
 # DATABASES
 DATABASES['default']['HOST'] = 'postgres'
-DATABASES['default']['PASSWORD'] = 'project-password'
+DATABASES['default']['PASSWORD'] = '%s-password' % PROJECT_NAME
 
 # DEBUG
 DEBUG = True
 TEMPLATES[0]['OPTIONS'].update({'debug': DEBUG})
 ALLOWED_HOSTS = ['*']
+
+# EMAIL
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # INTERNAL IPs hack for run in Docker
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -54,13 +53,10 @@ try:
     # doesn't even have to be reachable
     s.connect(('10.255.255.255', 1))
     INTERNAL_IPS = (s.getsockname()[0],)
-except:
+except Exception:
     pass
 finally:
     s.close()
-
-# EMAIL
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # STATIC
 STATICFILES_DIRS.append(STATIC_ROOT)
