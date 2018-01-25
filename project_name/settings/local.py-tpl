@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright 2017 ITCase (info@itcase.pro)
+# Copyright 2018 ITCase (info@itcase.pro)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,17 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import socket
-
-from .cache import CACHES
-from .core import DATABASES, INSTALLED_APPS, SESSION_CACHE_ALIAS, TEMPLATES
-from .project import PROJECT_NAME
-from .static import STATIC_ROOT, STATICFILES_DIRS
-
 # ****************************************************************
 # DJANGO
 
 # CACHES
+from .cache import CACHES  # noqa
+try:
+    from .core import SESSION_CACHE_ALIAS
+except ImportError:
+    SESSION_CACHE_ALIAS = None
 CACHE_MIDDLEWARE_SECONDS = 1
 for index, cache in enumerate(CACHES):
     CACHES[cache]['LOCATION'] = 'redis://redis:6379/%s' % index
@@ -34,37 +32,56 @@ for index, cache in enumerate(CACHES):
 
     CACHES[cache]['TIMEOUT'] = CACHE_MIDDLEWARE_SECONDS
 
-
-# DATABASES
-DATABASES['default']['HOST'] = 'postgres'
-DATABASES['default']['PASSWORD'] = '%s-password' % PROJECT_NAME
-
 # DEBUG
+# https://docs.djangoproject.com/en/dev/ref/settings/#debug
+from .core import TEMPLATES  # noqa
 DEBUG = True
 TEMPLATES[0]['OPTIONS'].update({'debug': DEBUG})
 ALLOWED_HOSTS = ['*']
 
+# INTERNAL IPs hack for run in Docker
+import socket, struct  # noqa
+INTERNAL_IPS = set()
+with open("/proc/net/route") as fh:
+    for line in fh:
+        fields = line.strip().split()
+
+        try:
+            ip = socket.inet_ntoa(struct.pack("<L", int(fields[2], 16)))
+        except ValueError:
+            continue
+
+        INTERNAL_IPS.add(ip)
+ONEC_REST_ALLOWED_HOSTS = INTERNAL_IPS
+
+# DATABASES
+from .core import DATABASES  # noqa
+DATABASES['default']['HOST'] = 'postgres'
+DATABASES['default']['PASSWORD'] = 'project-password'
+
 # EMAIL
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# INTERNAL IPs hack for run in Docker
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-try:
-    # doesn't even have to be reachable
-    s.connect(('10.255.255.255', 1))
-    INTERNAL_IPS = (s.getsockname()[0],)
-except Exception:
-    pass
-finally:
-    s.close()
-
 # STATIC
+from .static import STATIC_ROOT, STATICFILES_DIRS  # noqa
 STATICFILES_DIRS.append(STATIC_ROOT)
-STATIC_ROOT = None
+STATIC_ROOT = ''
 
 # ****************************************************************
 # THIRD-PARTY
 
 # Django Extensions
 # https://github.com/django-extensions/django-extensions
+from .core import INSTALLED_APPS  # noqa
 INSTALLED_APPS.append('django_extensions')
+
+# Django REST Framework
+# https://github.com/tomchristie/django-rest-framework
+try:
+    from .restframework import REST_FRAMEWORK
+except ImportError:
+    REST_FRAMEWORK = {}
+REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES'] = [
+    'rest_framework.permissions.AllowAny',
+]
+
