@@ -42,12 +42,12 @@ ALLOWED_HOSTS = ['*']
 # INTERNAL IPs hack for run in Docker
 import socket, struct  # noqa
 INTERNAL_IPS = set()
-with open("/proc/net/route") as fh:
+with open('/proc/net/route') as fh:
     for line in fh:
         fields = line.strip().split()
 
         try:
-            ip = socket.inet_ntoa(struct.pack("<L", int(fields[2], 16)))
+            ip = socket.inet_ntoa(struct.pack('<L', int(fields[2], 16)))
         except ValueError:
             continue
 
