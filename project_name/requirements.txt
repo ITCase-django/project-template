@@ -4,6 +4,7 @@ django-grappelli
 django-redis
 django
 
+pillow
 psycopg2-binary
 pytils
 raven
