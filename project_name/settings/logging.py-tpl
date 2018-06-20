@@ -35,6 +35,9 @@ LOGGING['formatters'].update({
 if 'handlers' not in LOGGING:
     LOGGING['handlers'] = {}
 
+# Handler for disabled loggers
+LOGGING['handlers']['null'] = {'class': 'logging.NullHandler'}
+
 # Allow catch 40x HTTP errors
 LOGGING['handlers']['mail_admins']['level'] = 'CRITICAL'
 
@@ -49,10 +52,9 @@ LOGGING['handlers']['console']['formatter'] = 'pretty'
 if 'loggers' not in LOGGING:
     LOGGING['loggers'] = {}
 
-# Management commands
-LOGGING['loggers']['management_commands'] = {
-    'handlers': ['console'],
-    'level': 'INFO',
+# Disable 'Invalid HTTP_HOST' errors
+LOGGING['loggers']['django.security.DisallowedHost'] = {
+    'handlers': ['null'],
     'propagate': False,
 }
 
