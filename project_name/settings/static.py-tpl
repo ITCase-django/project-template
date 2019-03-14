@@ -18,21 +18,20 @@ import os
 
 from . import BASE_DIR
 
-media_dirname = 'media'
-MEDIA_URL = '/%s/' % media_dirname
-MEDIA_ROOT = os.path.join(BASE_DIR, media_dirname)
+# File upload permissions
+# https://docs.djangoproject.com/en/dev/ref/settings/#file-upload-permissions
+FILE_UPLOAD_PERMISSIONS = 0o644
 
-static_dirname = 'static'
-STATIC_URL = '/%s/' % static_dirname
+_media = 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, _media)
+MEDIA_URL = f'/{_media}/'
 
+STATICFILES_DIRS = []
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-STATICFILES_DIRS = []
-STATIC_ROOT = os.path.join(BASE_DIR, static_dirname)
-
-# File upload permissions
-# https://docs.djangoproject.com/en/dev/ref/settings/#file-upload-permissions
-FILE_UPLOAD_PERMISSIONS = 0o644
+_static = 'static'
+STATIC_ROOT = os.path.join(BASE_DIR, _static)
+STATIC_URL = f'/{_static}/'

@@ -37,7 +37,7 @@ except ImportError:
     SESSION_CACHE_ALIAS = None
 CACHE_MIDDLEWARE_SECONDS = 1
 for index, cache in enumerate(CACHES):
-    CACHES[cache]['LOCATION'] = 'redis://redis:6379/%s' % index
+    CACHES[cache]['LOCATION'] = f'redis://redis:6379/{index}'
 
     if cache == SESSION_CACHE_ALIAS:
         continue
@@ -68,7 +68,7 @@ with open('/proc/net/route') as fh:
 # DATABASES
 from .core import DATABASES  # noqa
 DATABASES['default']['HOST'] = 'postgres'
-DATABASES['default']['PASSWORD'] = 'project-password'
+DATABASES['default']['PASSWORD'] = f'{PROJECT}-password'
 
 # EMAIL
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
