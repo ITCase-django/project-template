@@ -21,7 +21,7 @@ See for more details: https://github.com/sehmaschine/django-grappelli.
 """
 
 # The Site Title of your admin interface.
-GRAPPELLI_ADMIN_TITLE = '{{ project_title }}'
+GRAPPELLI_ADMIN_TITLE = '{{ project_name }}'
 
 # A dictionary containing search patterns for models you cannot (or should not)
 # alter.
