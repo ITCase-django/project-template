@@ -15,6 +15,18 @@
 # limitations under the License.
 
 # ****************************************************************
+# PROJECT
+
+import os  # noqa
+PROJECT = os.getenv('PROJECT')
+
+DJANGO_RQ_DISABLE = False
+
+# LOGGING
+from .logging import LOGGING  # noqa
+LOGGING['loggers']['management']['level'] = 'DEBUG'
+
+# ****************************************************************
 # DJANGO
 
 # CACHES
@@ -52,7 +64,6 @@ with open('/proc/net/route') as fh:
             continue
 
         INTERNAL_IPS.add(ip)
-ONEC_REST_ALLOWED_HOSTS = INTERNAL_IPS
 
 # DATABASES
 from .core import DATABASES  # noqa

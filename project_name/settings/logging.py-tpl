@@ -59,6 +59,23 @@ LOGGING['loggers']['django.security.DisallowedHost'] = {
 }
 
 # ****************************************************************
+# PROJECT
+
+_format = LOGGING['formatters']['pretty']['format']
+
+# Uses for custom management commands
+LOGGING['formatters']['management'] = {'format': 'MANAGEMENT ' + _format}
+LOGGING['handlers']['management'] = {
+    'class': 'logging.StreamHandler',
+    'formatter': 'management',
+    'level': 'DEBUG',
+}
+LOGGING['loggers']['management'] = {
+    'handlers': ['management'],
+    'level': 'WARNING',
+}
+
+# ****************************************************************
 # THIRD-PARTY
 
 # Sentry
