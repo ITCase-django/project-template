@@ -14,21 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
+# Configuration Django RQ
+# See https://github.com/rq/django-rq
 
-BASE_DIR = os.path.join(os.path.dirname(__file__), os.pardir)
-BASE_DIR = os.path.abspath(BASE_DIR)
+RQ_QUEUES = {
+    'default': {'USE_REDIS_CACHE': 'queue'},
+}
 
-from .cache import CACHES  # noqa
-from .core import *  # noqa
-from .logging import LOGGING  # noqa
-from .static import *  # noqa
-
-from .filebrowser import *  # noqa
-from .grappelli import *  # noqa
-from .rq import RQ_QUEUES  # noqa
-from .sentry import RAVEN_CONFIG  # noqa
-
-from .project import *  # noqa
-
-from .local import *  # noqa

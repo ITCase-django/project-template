@@ -24,7 +24,10 @@ DJANGO_RQ_DISABLE = False
 
 # LOGGING
 from .logging import LOGGING  # noqa
-LOGGING['loggers']['management']['level'] = 'DEBUG'
+for logger in ('management', 'rq.worker'):
+    if logger not in LOGGING['loggers']:
+        continue
+    LOGGING['loggers'][logger]['level'] = 'DEBUG'
 
 # ****************************************************************
 # DJANGO

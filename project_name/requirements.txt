@@ -2,6 +2,7 @@ django-appconf
 django-filebrowser
 django-grappelli
 django-redis
+django-rq
 django
 
 pillow
