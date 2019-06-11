@@ -27,7 +27,6 @@ from .static import *  # noqa
 from .filebrowser import *  # noqa
 from .grappelli import *  # noqa
 from .rq import RQ_QUEUES  # noqa
-from .sentry import RAVEN_CONFIG  # noqa
 
 from .project import *  # noqa
 
