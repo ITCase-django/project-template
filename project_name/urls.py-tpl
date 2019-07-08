@@ -27,8 +27,9 @@ admin.autodiscover()
 urlpatterns = [
 
     url(r'^admin/', include([
-        url(r'^grappelli/', include('grappelli.urls')),
+        url(r'^django-rq/', include('django_rq.urls')),
         url(r'^filebrowser/', include(fb_site.urls)),
+        url(r'^grappelli/', include('grappelli.urls')),
         url(r'^', include(admin.site.urls)),
     ])),
 

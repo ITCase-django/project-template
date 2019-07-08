@@ -20,15 +20,16 @@ See for more details:
 https://django-grappelli.readthedocs.io/en/latest/dashboard_setup.html
 """
 
+from django.urls import reverse_lazy
+
 from grappelli.dashboard import modules, Dashboard
 
 
 class ProjectDashboard(Dashboard):
 
-    def __init__(self, **kwargs):
-        from django.core.urlresolvers import reverse_lazy
+    def init_with_context(self, context):
 
-        super().__init__(**kwargs)
+        request = context['request']
 
         self.children.append(modules.AppList(
             title='Управление сайтом',
@@ -43,6 +44,9 @@ class ProjectDashboard(Dashboard):
             column=1,
             exclude=('django.contrib.*', )
         ))
+
+        if request.user.is_superuser:
+            self.children.append(self.get_site_part())
 
         self.children.append(modules.LinkList(
             title='Управление файлами',
@@ -63,3 +67,8 @@ class ProjectDashboard(Dashboard):
             collapsible=False,
             column=2,
         ))
+
+    def get_site_part(self):
+        children = [{'title': 'Django RQ', 'url': reverse_lazy('rq_home')}]
+        return modules.LinkList(title='Cайт', collapsible=False, column=2,
+                                children=children)
