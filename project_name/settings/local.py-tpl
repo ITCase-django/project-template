@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-#
-# Copyright 2018 ITCase (info@itcase.pro)
+# Copyright 2019 ITCase (info@itcase.pro)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +20,6 @@ PROJECT = os.getenv('PROJECT')
 
 DJANGO_RQ_DISABLE = False
 
-# LOGGING
-from .logging import LOGGING  # noqa
-for logger in ('management', 'rq.worker'):
-    if logger not in LOGGING['loggers']:
-        continue
-    LOGGING['loggers'][logger]['level'] = 'DEBUG'
-
 # ****************************************************************
 # DJANGO
 
@@ -47,12 +38,20 @@ for index, cache in enumerate(CACHES):
 
     CACHES[cache]['TIMEOUT'] = CACHE_MIDDLEWARE_SECONDS
 
+# DATABASES
+from .core import DATABASES  # noqa
+DATABASES['default']['HOST'] = 'postgres'
+DATABASES['default']['PASSWORD'] = f'{PROJECT}-password'
+
 # DEBUG
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
 from .core import TEMPLATES  # noqa
 DEBUG = True
 TEMPLATES[0]['OPTIONS'].update({'debug': DEBUG})
 ALLOWED_HOSTS = ['*']
+
+# EMAIL
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # INTERNAL IPs hack for run in Docker
 import socket, struct  # noqa
@@ -68,13 +67,13 @@ with open('/proc/net/route') as fh:
 
         INTERNAL_IPS.add(ip)
 
-# DATABASES
-from .core import DATABASES  # noqa
-DATABASES['default']['HOST'] = 'postgres'
-DATABASES['default']['PASSWORD'] = f'{PROJECT}-password'
 
-# EMAIL
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# LOGGING
+from .logging import LOGGING  # noqa
+for logger in ('management', 'rq.worker'):
+    if logger not in LOGGING['loggers']:
+        continue
+    LOGGING['loggers'][logger]['level'] = 'DEBUG'
 
 # STATIC
 from .static import STATIC_ROOT, STATICFILES_DIRS  # noqa

@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-#
-# Copyright 2018 ITCase (info@itcase.pro)
+# Copyright 2019 ITCase (info@itcase.pro)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-
 from . import BASE_DIR
 
 # File upload permissions
@@ -23,7 +19,7 @@ from . import BASE_DIR
 FILE_UPLOAD_PERMISSIONS = 0o644
 
 _media = 'media'
-MEDIA_ROOT = os.path.join(BASE_DIR, _media)
+MEDIA_ROOT = BASE_DIR.joinpath(_media)
 MEDIA_URL = f'/{_media}/'
 
 STATICFILES_DIRS = []
@@ -33,5 +29,5 @@ STATICFILES_FINDERS = (
 )
 
 _static = 'static'
-STATIC_ROOT = os.path.join(BASE_DIR, _static)
+STATIC_ROOT = BASE_DIR.joinpath(_static)
 STATIC_URL = f'/{_static}/'

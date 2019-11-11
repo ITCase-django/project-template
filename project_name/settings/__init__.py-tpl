@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-#
-# Copyright 2018 ITCase (info@itcase.pro)
+# Copyright 2019 ITCase (info@itcase.pro)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
+from pathlib import Path
 
-BASE_DIR = os.path.join(os.path.dirname(__file__), os.pardir)
-BASE_DIR = os.path.abspath(BASE_DIR)
+BASE_DIR = Path(__file__).parent.parent.absolute()
 
 from .cache import CACHES  # noqa
 from .core import *  # noqa
@@ -26,6 +23,7 @@ from .static import *  # noqa
 
 from .filebrowser import *  # noqa
 from .grappelli import *  # noqa
+from .rest_framework import REST_FRAMEWORK  # noqa
 from .rq import RQ_QUEUES  # noqa
 
 from .project import *  # noqa

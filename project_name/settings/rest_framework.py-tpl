@@ -12,8 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PROJECT_NAME = '{{ project_name }}'
+"""Configure Django REST Framework
 
-# ****************************************************************
-# ITCASE
-# Put bellow options for ITCase Dev packages
+See: https://www.django-rest-framework.org/
+"""
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}

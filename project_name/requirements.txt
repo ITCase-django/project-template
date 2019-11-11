@@ -1,9 +1,10 @@
+django
 django-appconf
 django-filebrowser
 django-grappelli
 django-redis
 django-rq
-django
+djangorestframework
 
 pillow
 psycopg2-binary
