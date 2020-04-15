@@ -39,8 +39,8 @@ INSTALLED_APPS = [
 
     'django_rq',
     'filebrowser',
-    'grappelli.dashboard',
     'grappelli',
+    'grappelli.dashboard',
     'raven.contrib.django.raven_compat',
     'rest_framework',
     'rest_framework.authtoken',
@@ -127,7 +127,7 @@ THOUSAND_SEPARATOR = ' '
 USE_THOUSAND_SEPARATOR = True
 
 # Controls where Django stores session data.
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 # If you’re using cache-based session storage, this selects the cache to use.
 SESSION_CACHE_ALIAS = 'session'
 
