@@ -1,4 +1,4 @@
-# Copyright 2019 ITCase (info@itcase.pro)
+# Copyright 2020 ITCase (info@itcase.pro)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 
 ALLOWED_HOSTS = ['*.{{ project_name }}.example.com']
 DEBUG = False
-INTERNAL_IPS = ['127.0.0.1']
 
 # DATABASES
 from .core import DATABASES  # noqa
