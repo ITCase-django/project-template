@@ -1,4 +1,4 @@
-# Copyright 2019 ITCase (info@itcase.pro)
+# Copyright 2020 ITCase (info@itcase.pro)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,9 +13,10 @@
 # limitations under the License.
 
 from django.conf import settings
-from django.conf.urls import include, static, url
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.urls import include, path
 from django.views.generic import TemplateView
 
 from filebrowser.sites import site as fb_site
@@ -25,21 +26,20 @@ admin.autodiscover()
 
 urlpatterns = [
 
-    url(r'^admin/', include([
-        url(r'^django-rq/', include('django_rq.urls')),
-        url(r'^filebrowser/', fb_site.urls),
-        url(r'^grappelli/', include('grappelli.urls')),
-        url(r'^', admin.site.urls),
+    path('admin/', include([
+        path('django-rq/', include('django_rq.urls')),
+        path('filebrowser/', fb_site.urls),
+        path('grappelli/', include('grappelli.urls')),
+        path('', admin.site.urls),
     ])),
 
-    url(r'^rest/', include([
-        url(r'^token/$', rest_token_views.obtain_auth_token),
+    path('rest/', include([
+        path('token/', rest_token_views.obtain_auth_token),
     ])),
 
-    url(r'^$', TemplateView.as_view(template_name='base.html')),
+    path('', TemplateView.as_view(template_name='base.html')),
 ]
 
 
 urlpatterns += staticfiles_urlpatterns()
-urlpatterns += static.static(settings.MEDIA_URL,
-                             document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
