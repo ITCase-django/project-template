@@ -23,8 +23,12 @@ from .core import DATABASES  # noqa
 DATABASES['default']['PASSWORD'] =
 
 # EMAIL
-# put here only password, other settings in `core.py`
+DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+EMAIL_HOST = 'localhost'
 EMAIL_HOST_PASSWORD =
+EMAIL_HOST_USER = DEFAULT_FROM_EMAIL
+EMAIL_PORT = 465
+EMAIL_USE_TLS = True
 
 # ****************************************************************
 # THIRD-PARTY
