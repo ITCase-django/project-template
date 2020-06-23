@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'filebrowser',
     'grappelli.dashboard',
     'grappelli',
-    'raven.contrib.django.raven_compat',
     'rest_framework',
     'rest_framework.authtoken',
 

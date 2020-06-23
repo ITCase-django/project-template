@@ -31,5 +31,12 @@ EMAIL_HOST_PASSWORD =
 
 # Sentry
 # See for more details: https://docs.sentry.io/
-RAVEN_CONFIG = {'dsn': }
+import sentry_sdk  # noqa
+from sentry_sdk.integrations.django import DjangoIntegration  # noqa
+from sentry_sdk.integrations.rq import RqIntegration  # noqa
+sentry_sdk.init(
+    dsn=,
+    integrations=[DjangoIntegration(), RqIntegration()],
+    send_default_pii=True
+)
 
