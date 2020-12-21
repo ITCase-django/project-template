@@ -110,13 +110,3 @@ if False:  # False/True
 # https://github.com/django-extensions/django-extensions
 from .core import INSTALLED_APPS  # noqa
 INSTALLED_APPS.append('django_extensions')
-
-# Django REST Framework
-# https://github.com/tomchristie/django-rest-framework
-try:
-    from .restframework import REST_FRAMEWORK
-except ImportError:
-    REST_FRAMEWORK = {}
-REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES'] = [
-    'rest_framework.permissions.AllowAny',
-]
