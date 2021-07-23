@@ -3,10 +3,11 @@ django-filebrowser<3.13
 django-grappelli<2.14
 django-redis
 django-rq
-django<3
+django>=2.2,<3
 djangorestframework
 
 pillow
-psycopg2-binary
+psycopg2-binary<2.9
 pytils
 sentry-sdk
+supervisor
