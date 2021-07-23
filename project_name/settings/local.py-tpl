@@ -31,42 +31,24 @@ except ImportError:
     SESSION_CACHE_ALIAS = None
 CACHE_MIDDLEWARE_SECONDS = 1
 for index, cache in enumerate(CACHES):
-    CACHES[cache]['LOCATION'] = f'redis://redis:6379/{index}'
-
     if cache == SESSION_CACHE_ALIAS:
         continue
-
     CACHES[cache]['TIMEOUT'] = CACHE_MIDDLEWARE_SECONDS
 
 # DATABASES
 from .core import DATABASES  # noqa
-DATABASES['default']['HOST'] = 'postgres'
 DATABASES['default']['PASSWORD'] = f'{PROJECT}-password'
 
 # DEBUG
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
 from .core import TEMPLATES  # noqa
 DEBUG = True
+INTERNAL_IPS = ('127.0.0.1', 'localhost')
 TEMPLATES[0]['OPTIONS'].update({'debug': DEBUG})
 ALLOWED_HOSTS = ['*']
 
 # EMAIL
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-# INTERNAL IPs hack for run in Docker
-import socket, struct  # noqa
-INTERNAL_IPS = set()
-with open('/proc/net/route') as fh:
-    for line in fh:
-        fields = line.strip().split()
-
-        try:
-            ip = socket.inet_ntoa(struct.pack('<L', int(fields[2], 16)))
-        except ValueError:
-            continue
-
-        INTERNAL_IPS.add(ip)
-
 
 # LOGGING
 from .logging import LOGGING  # noqa
@@ -110,3 +92,13 @@ if False:  # False/True
 # https://github.com/django-extensions/django-extensions
 from .core import INSTALLED_APPS  # noqa
 INSTALLED_APPS.append('django_extensions')
+
+# Django REST Framework
+# https://github.com/tomchristie/django-rest-framework
+try:
+    from .restframework import REST_FRAMEWORK
+except ImportError:
+    REST_FRAMEWORK = {}
+REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES'] = [
+    'rest_framework.permissions.AllowAny',
+]
