@@ -1,1 +1,1 @@
-# Put here list of ITCase Dev packages
+# -e git+https://github.com/ITCase/itcase-PLUGIN.git@develop#egg=itcase_PLUGIN

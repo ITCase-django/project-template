@@ -1,13 +1,15 @@
+-r requirements-itcase.txt
+
 django-appconf
-django-filebrowser<3.13
-django-grappelli<2.14
+django-filebrowser<4
+django-grappelli<3
 django-redis
 django-rq
-django>=2.2,<3
+django>=3.2,<4
 djangorestframework
 
 pillow
-psycopg2-binary<2.9
+psycopg2-binary
 pytils
 sentry-sdk
 supervisor
