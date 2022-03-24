@@ -13,6 +13,8 @@ trim_trailing_whitespace = true
 
 [*.{html,py}]
 indent_size = 4
+
+[*.py]
 insert_final_newline = true
 
 # Makefile prefered only tabs
