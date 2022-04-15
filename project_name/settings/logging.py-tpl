@@ -51,7 +51,7 @@ LOGGING['loggers']['django.security.DisallowedHost'] = {
 # ****************************************************************
 # PROJECT
 
-_format = LOGGING['formatters']['pretty']['format']
+_format = LOGGING['formatters']['verbose']['format']
 
 # Uses for custom management commands
 LOGGING['formatters']['management'] = {'format': 'MANAGEMENT ' + _format}

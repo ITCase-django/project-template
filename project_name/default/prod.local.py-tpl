@@ -3,7 +3,7 @@
 # ****************************************************************
 # DJANGO
 
-ALLOWED_HOSTS = ['*.{{ project_name }}.example.com']
+ALLOWED_HOSTS = ['.{{ project_name }}.example.com']
 DEBUG = False
 from .core import TEMPLATES  # noqa
 TEMPLATES[0]['OPTIONS'].update({'debug': DEBUG})
