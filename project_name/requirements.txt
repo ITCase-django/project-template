@@ -1,5 +1,3 @@
--r requirements-itcase.txt
-
 django-appconf
 django-filebrowser<4
 django-grappelli<3
