@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     # third-party
     'django_rq',
     'filebrowser',
-    'grappelli.dashboard',
+    'grappelli.dashboard',  # should be before Grappelli's core
     'grappelli',
     'rest_framework',
     'rest_framework.authtoken',

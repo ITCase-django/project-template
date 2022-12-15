@@ -1,4 +1,6 @@
 django-appconf
+django-cors-headers
+django-extensions
 django-filebrowser<4
 django-grappelli<3
 django-redis
