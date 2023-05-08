@@ -1,4 +1,4 @@
-# Copyright 2022 ITCase (info@itcase.pro)
+# Copyright 2023 ITCase (info@itcase.pro)
 
 # Django REST Framework
 # https://github.com/tomchristie/django-rest-framework

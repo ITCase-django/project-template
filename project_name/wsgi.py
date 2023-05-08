@@ -1,4 +1,4 @@
-# Copyright 2022 ITCase (info@itcase.pro)
+# Copyright 2023 ITCase (info@itcase.pro)
 
 # WSGI config for project.
 # It exposes the WSGI callable as a module-level variable named 'application'.

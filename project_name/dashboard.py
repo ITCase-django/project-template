@@ -1,4 +1,4 @@
-# Copyright 2022 ITCase (info@itcase.pro)
+# Copyright 2023 ITCase (info@itcase.pro)
 
 # Django Grappelli Dashboard
 # https://django-grappelli.readthedocs.io/en/latest/dashboard_setup.html

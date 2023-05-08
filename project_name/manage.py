@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright 2022 ITCase (info@itcase.pro)
+# Copyright 2023 ITCase (info@itcase.pro)
 
 # Django's command-line utility for administrative tasks.
 import os
