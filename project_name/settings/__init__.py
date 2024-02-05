@@ -1,4 +1,4 @@
-# Copyright 2023 ITCase (info@itcase.pro)
+# Copyright 2024 ITCase (info@itcase.pro)
 
 from pathlib import Path
 

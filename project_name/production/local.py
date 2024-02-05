@@ -1,20 +1,20 @@
-# Copyright 2023 ITCase (info@itcase.pro)
+# Copyright 2024 ITCase (info@itcase.pro)
 
 # ****************************************************************
 # DJANGO
 
-ALLOWED_HOSTS = ['.{{ project_name }}.example.com']
+ALLOWED_HOSTS = [".{{ project_name }}.example.com"]
 DEBUG = False
 from .core import TEMPLATES  # noqa
-TEMPLATES[0]['OPTIONS'].update({'debug': DEBUG})
+TEMPLATES[0]["OPTIONS"].update({"debug": DEBUG})
 
 # DATABASES
 from .core import DATABASES  # noqa
-DATABASES['default']['PASSWORD'] =
+DATABASES["default"]["PASSWORD"] =
 
 # EMAIL
-DEFAULT_FROM_EMAIL = 'webmaster@localhost'
-EMAIL_HOST = 'localhost'
+DEFAULT_FROM_EMAIL = "webmaster@localhost"
+EMAIL_HOST = "localhost"
 EMAIL_HOST_PASSWORD =
 EMAIL_HOST_USER = DEFAULT_FROM_EMAIL
 EMAIL_PORT = 465

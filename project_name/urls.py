@@ -1,4 +1,4 @@
-# Copyright 2023 ITCase (info@itcase.pro)
+# Copyright 2024 ITCase (info@itcase.pro)
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -15,25 +15,29 @@ admin.autodiscover()
 urlpatterns = [
     # admin
     path(
-        'admin/',
-        include([
-            # third-party
-            path('django-rq/', include('django_rq.urls')),
-            path('filebrowser/', fb_site.urls),
-            path('grappelli/', include('grappelli.urls')),
-
-            # django
-            path('', admin.site.urls),
-        ])),
-
+        "admin/",
+        include(
+            [
+                # third-party
+                path("django-rq/", include("django_rq.urls")),
+                path("filebrowser/", fb_site.urls),
+                path("grappelli/", include("grappelli.urls")),
+                # django
+                path("", admin.site.urls),
+            ]
+        ),
+    ),
     # rest
-    path('rest/',
-         include([
-             path('token/', rest_token_views.obtain_auth_token),
-         ])),
-
+    path(
+        "rest/",
+        include(
+            [
+                path("token/", rest_token_views.obtain_auth_token),
+            ]
+        ),
+    ),
     # local
-    path('', TemplateView.as_view(template_name='base.html')),
+    path("", TemplateView.as_view(template_name="base.html")),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

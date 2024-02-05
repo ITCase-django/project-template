@@ -1,19 +1,7 @@
-# Copyright 2023 ITCase (info@itcase.pro)
+# Copyright 2024 ITCase (info@itcase.pro)
 
 # Django Grappelli
 # https://github.com/sehmaschine/django-grappelli
 
-# The Site Title of your admin interface.
-GRAPPELLI_ADMIN_TITLE = '{{ project_name }}'
-
-# A dictionary containing search patterns for models you cannot (or should not)
-# alter.
-GRAPPELLI_AUTOCOMPLETE_SEARCH_FIELDS = {
-    'auth': {
-        'user': ('first_name__icontains', 'last_name__icontains',
-                 'username__icontains', 'email__icontains'),
-        'group': ('name__icontains', ),
-    }
-}
-
-GRAPPELLI_INDEX_DASHBOARD = 'dashboard.ProjectDashboard'
+GRAPPELLI_ADMIN_TITLE = "{{ project_name }}"
+GRAPPELLI_INDEX_DASHBOARD = "dashboard.ProjectDashboard"

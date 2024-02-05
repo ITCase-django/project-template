@@ -1,0 +1,48 @@
+[tool.black]
+line-length = 120
+
+[tool.poetry]
+name = "{{ project_name }}"
+version = "0.1.0"
+description = ""
+authors = ["ITCase <info@itcase.pro>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.8"
+django = "^4.2"
+django-appconf = "^1.0"
+django-cors-headers = "^4.3"
+django-filebrowser = "^4.0"
+django-filter = "^23"
+django-grappelli = "^3.0"
+django-nested-admin = "^4.0"
+django-phonenumber-field = {version = "^7.3", extras = ["phonenumberslite"]}
+django-redis = "^5.4"
+django-rq = "^2.10"
+django-tinymce-4 = {git = "https://github.com/ITCase-django/django-tinymce-4.git", develop = true}
+djangorestframework = "^3.14"
+asgiref = "^3.7"
+channels = {version = "^4.0", extras = ["daphne"]}
+channels-redis = "^4.1"
+drf-extra-fields = "^3.7"
+drf-spectacular = {version = "^0.27", extras = ["sidecar"]}
+psycopg = "^3.1"
+
+[tool.poetry.group.prod.dependencies]
+sentry-sdk = {version = "^1.39", extras = ["django"]}
+supervisor = "^4.2"
+
+[tool.poetry.group.itcase.dependencies]
+itcase-common = {git = "ssh://git@github.com/ITCase/itcase-common", rev = "develop", develop = true}
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4"
+pytest-django = "^4.7"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
