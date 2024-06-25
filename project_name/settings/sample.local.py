@@ -5,13 +5,13 @@
 # ****************************************************************
 # DJANGO
 
-from .caches import CACHES  # noqa
+from .caches import CACHES  # fmt: skip
 for cache in CACHES:
     CACHES[cache]["LOCATION"] = CACHES[cache]["LOCATION"].replace(
         "127.0.0.1", "192.168.1.21")
 
 # DATABASES
-from .core import DATABASES  # noqa
+from .core import DATABASES  # fmt: skip
 DATABASES["default"]["HOST"] = "192.168.1.21"
 DATABASES["default"]["PASSWORD"] =
 
@@ -20,14 +20,14 @@ DATABASES["default"]["PASSWORD"] =
 ALLOWED_HOSTS = ["*"]
 DEBUG = True
 INTERNAL_IPS = ("127.0.0.1", "localhost")
-from .core import TEMPLATES  # noqa
+from .core import TEMPLATES  # fmt: skip
 TEMPLATES[0]["OPTIONS"].update({"debug": DEBUG})
 
 # EMAIL
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # STATIC
-from .core import STATIC_ROOT, STATICFILES_DIRS  # noqa
+from .core import STATIC_ROOT, STATICFILES_DIRS  # fmt: skip
 STATICFILES_DIRS.append(STATIC_ROOT)
 STATIC_ROOT = None
 
@@ -39,7 +39,7 @@ STATIC_ROOT = None
 # required for NextJS frontend
 try:
     import corsheaders  # noqa
-    from .core import INSTALLED_APPS, MIDDLEWARE  # noqa
+    from .core import INSTALLED_APPS, MIDDLEWARE  # fmt: skip
     INSTALLED_APPS.append("corsheaders")
     MIDDLEWARE.insert(0, "corsheaders.middleware.CorsMiddleware")
     CORS_ALLOW_ALL_ORIGINS = True
@@ -48,7 +48,7 @@ except ImportError:
 
 # Django RQ
 # https://github.com/rq/django-rq
-from .rq import RQ_QUEUES  # noqa
+from .rq import RQ_QUEUES  # fmt: skip
 # run all queues in synchronous mode
 for queueConfig in RQ_QUEUES.values():
     queueConfig["ASYNC"] = False

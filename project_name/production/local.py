@@ -5,11 +5,11 @@
 
 ALLOWED_HOSTS = [".{{ project_name }}.example.com"]
 DEBUG = False
-from .core import TEMPLATES  # noqa
+from .core import TEMPLATES  # fmt: skip
 TEMPLATES[0]["OPTIONS"].update({"debug": DEBUG})
 
 # DATABASES
-from .core import DATABASES  # noqa
+from .core import DATABASES  # fmt: skip
 DATABASES["default"]["PASSWORD"] =
 
 # EMAIL
@@ -25,9 +25,9 @@ EMAIL_USE_TLS = True
 
 # Sentry
 # https://docs.sentry.io/
-import sentry_sdk  # noqa
-from sentry_sdk.integrations.django import DjangoIntegration  # noqa
-from sentry_sdk.integrations.rq import RqIntegration  # noqa
+import sentry_sdk  # fmt: skip
+from sentry_sdk.integrations.django import DjangoIntegration  # fmt: skip
+from sentry_sdk.integrations.rq import RqIntegration  # fmt: skip
 sentry_sdk.init(
     dsn=,
     integrations=[DjangoIntegration(), RqIntegration()],

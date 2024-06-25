@@ -3,16 +3,14 @@
 # ****************************************************************
 # PROJECT
 
-import os  # noqa
-
+import os  # fmt: skip
 PROJECT = os.getenv("PROJECT")
 
 # ****************************************************************
 # DJANGO
 
 # DATABASES
-from .core import DATABASES  # noqa
-
+from .core import DATABASES  # fmt: skip
 DATABASES["default"]["PASSWORD"] = f"{PROJECT}-password"
 
 # DEBUG
@@ -20,27 +18,19 @@ DATABASES["default"]["PASSWORD"] = f"{PROJECT}-password"
 ALLOWED_HOSTS = ["*"]
 DEBUG = True
 INTERNAL_IPS = ("127.0.0.1", "localhost")
-from .core import TEMPLATES  # noqa
-
+from .core import TEMPLATES  # fmt: skip
 TEMPLATES[0]["OPTIONS"].update({"debug": DEBUG})
 
 # EMAIL
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-# https://docs.djangoproject.com/en/dev/howto/initial-data/#initial-data-via-fixtures
-from pathlib import Path  # noqa
-
-fixture_dir = Path(os.getenv("PROJECT_TMP", "")) / "fixtures"
-if fixture_dir.is_dir():
-    FIXTURE_DIRS = [fixture_dir]
-
 # LOGGING
-from .logging import LOGGING  # noqa
+from .logging import LOGGING  # fmt: skip
 
 # local
 loggers = []
 # itcase
-# from itcase_plugin.logging import LOGGERS as itcase_plugin_loggers  # noqa
+# from itcase_plugin.logging import LOGGERS as itcase_plugin_loggers  # fmt: skip
 # loggers += list(itcase_plugin_loggers.keys())
 # add more verbosity to itcase-plugin loggers
 # LOGGING["handlers"]["itcase_plugin"]["formatter"] = "verbose"
@@ -53,8 +43,7 @@ for logger in loggers:
     LOGGING["loggers"][logger]["level"] = "DEBUG"
 
 # STATIC
-from .core import STATIC_ROOT, STATICFILES_DIRS  # noqa
-
+from .core import STATIC_ROOT, STATICFILES_DIRS  # fmt: skip
 STATICFILES_DIRS.append(STATIC_ROOT)
 STATIC_ROOT = None
 
@@ -66,19 +55,17 @@ STATIC_ROOT = None
 # required for NextJS frontend
 try:
     import corsheaders  # noqa
-    from .core import INSTALLED_APPS, MIDDLEWARE  # noqa
-
+    from .core import INSTALLED_APPS, MIDDLEWARE  # fmt: skip
     INSTALLED_APPS.append("corsheaders")
     MIDDLEWARE.insert(0, "corsheaders.middleware.CorsMiddleware")
     CORS_ALLOW_ALL_ORIGINS = True
 except ImportError:
-    pass
+    print('Can not import "corsheaders"')
 
 # Django Debug Toolbar
 # https://github.com/jazzband/django-debug-toolbar
-if False:  # False/True
-    from .core import INSTALLED_APPS, MIDDLEWARE  # noqa
-
+try:
+    from .core import INSTALLED_APPS, MIDDLEWARE  # fmt: skip
     DEBUG_TOOLBAR_PANELS = [
         # "debug_toolbar.panels.versions.VersionsPanel",
         # "debug_toolbar.panels.timer.TimerPanel",
@@ -97,22 +84,22 @@ if False:  # False/True
     INSTALLED_APPS.append("debug_toolbar")
     MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
     ROOT_URLCONF = "debug_toolbar_urls"
+except ImportError:
+    print('Can not import "debug_toolbar"')
 
 # Django Extensions
 # https://github.com/django-extensions/django-extensions
 try:
     import django_extensions  # noqa
-    from .core import INSTALLED_APPS  # noqa
-
+    from .core import INSTALLED_APPS  # fmt: skip
     INSTALLED_APPS.append("django_extensions")
 except ImportError:
-    pass
+    print('Can not import "django_extensions"')
 
 # Django REST Framework
 # https://github.com/tomchristie/django-rest-framework
 try:
-    from .rest_framework import REST_FRAMEWORK
-
+    from .rest_framework import REST_FRAMEWORK  # fmt: skip
     REST_FRAMEWORK.update(
         {
             "DEFAULT_RENDERER_CLASSES": (
@@ -122,12 +109,11 @@ try:
         }
     )
 except ImportError:
-    pass
+    print('Can not import "settings.rest_framework"')
 
 # Django RQ
 # https://github.com/rq/django-rq
-from .rq import RQ_QUEUES  # noqa
-
+from .rq import RQ_QUEUES  # fmt: skip
 # run all queues in synchronous mode
 for queueConfig in RQ_QUEUES.values():
     queueConfig["ASYNC"] = False
