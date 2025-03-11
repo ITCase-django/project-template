@@ -1,17 +1,17 @@
-# Copyright 2024 ITCase (info@itcase.pro)
+# Copyright 2025 ITCase (info@itcase.pro)
 
 from pathlib import Path
 
 BASE_DIR = Path(__file__).parent.parent.absolute()
 
-from .cache import CACHES  # noqa
+from .cache import *  # noqa
 from .core import *  # noqa
-from .logging import LOGGING  # noqa
+from .logging import *  # noqa
 
 from .filebrowser import *  # noqa
 from .grappelli import *  # noqa
-from .rest_framework import REST_FRAMEWORK  # noqa
-from .rq import RQ_QUEUES  # noqa
+from .rest_framework import *  # noqa
+from .rq import *  # noqa
 
 from .project import *  # noqa
 

@@ -1,4 +1,4 @@
-# Copyright 2024 ITCase (info@itcase.pro)
+# Copyright 2025 ITCase (info@itcase.pro)
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -42,3 +42,13 @@ urlpatterns = [
 
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# ****************************************************************
+# DEBUG
+
+if settings.DEBUG:
+    try:
+        import debug_toolbar  # fmt:skip
+        urlpatterns.append(path("__debug__/", include(debug_toolbar.urls)))
+    except ImportError:
+        print('Can not import "debug_toolbar"')

@@ -1,0 +1,60 @@
+services:
+
+  django:
+    build:
+      context: .
+      dockerfile: ./docker-compose/django/Dockerfile
+    image: {{ project_name }}-django
+    container_name: {{ project_name }}-django
+    depends_on:
+      - postgres
+      - redis
+    env_file: ./docker-compose/django/env
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ./:/project/
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+  rqworker:
+    image: {{ project_name }}-django
+    container_name: {{ project_name }}-rqworker
+    depends_on:
+      - django
+    env_file: ./docker-compose/django/env
+    volumes:
+      - ./:/project/
+    # специальная команда для запуска RQ Worker
+    # подробности в docker-compose/django/entrypoint.sh
+    command: "rqworker"
+
+  # cron:
+  #   image: {{ project_name }}-django
+  #   container_name: {{ project_name }}-cron
+  #   depends_on:
+  #     - django
+  #   env_file: ./docker-compose/django/env
+  #   volumes:
+  #     - ./:/project/
+  #   # специальная команда для запуска Cron
+  #   # подробности в docker-compose/django/entrypoint.sh
+  #   command: "cron"
+
+  postgres:
+    # номер версии как на проде
+    image: postgres:16-alpine
+    container_name: {{ project_name }}-postgres
+    environment:
+      POSTGRES_DB: {{ project_name }}
+      POSTGRES_USER: {{ project_name }}
+      POSTGRES_PASSWORD: {{ project_name }}
+    volumes:
+      # храним базу локально, чтобы не тёрлась при перезагрузке контейнера
+      - ./docker-compose/postgres/data:/var/lib/postgresql/data/
+      # добавляем скрипт для загрузки дампа базы (если он есть и база пустая)
+      - ./docker-compose/postgres/init/:/docker-entrypoint-initdb.d/
+
+  redis:
+    # номер версии как на проде
+    image: redis:7-alpine
+    container_name: {{ project_name }}-redis
