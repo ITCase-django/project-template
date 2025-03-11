@@ -1,3 +1,7 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.black]
 line-length = 120
 
@@ -9,39 +13,41 @@ authors = ["ITCase <info@itcase.pro>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.10"
+python = ">=3.12"
 django = "^4.2"
-django-appconf = "^1.0"
-django-cors-headers = "^4.4"
 django-filebrowser = "^4.0"
-django-filter = "^24"
+django-filter = "^25"
 django-grappelli = "^3.0"
 django-phonenumber-field = {version = "^8.0", extras = ["phonenumberslite"]}
 django-redis = "^5.4"
-django-rq = "^2.10"
+django-rq = "^3.0"
 django-tinymce-4 = {git = "https://github.com/ITCase-django/django-tinymce-4.git", develop = true}
 djangorestframework = "^3.15"
-drf-extra-fields = "^3.7"
-drf-spectacular = {version = "^0.27", extras = ["sidecar"]}
-asgiref = "^3.8"
-channels = {version = "^4.1", extras = ["daphne"]}
+drf-spectacular = {version = "^0.28", extras = ["sidecar"]}
+channels = {version = "^4.2", extras = ["daphne"]}
 channels-redis = "^4.2"
-psycopg = "^3.1"
+psycopg = {version = "^3.2", extras = ["binary"]}
 
 [tool.poetry.group.prod.dependencies]
-sentry-sdk = {version = "^2.6", extras = ["django"]}
+sentry-sdk = {version = "^2.15", extras = ["django"]}
 supervisor = "^4.2"
 
 [tool.poetry.group.itcase.dependencies]
 itcase-common = {git = "ssh://git@github.com/ITCase/itcase-common", rev = "develop", develop = true}
 
 [tool.poetry.group.test.dependencies]
-pytest = "^8.2"
-pytest-django = "^4.8"
+factory-boy = "^3.3"
+pytest = "^8.3"
+pytest-django = "^4.10"
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = "^3.7"
+django-cors-headers = "^4.7"
+django-debug-toolbar = "^5.0"
+django-extensions = "^3.2"
+ipdb = "^0.13"
+pre-commit = "^4.1"
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.pytest.ini_options]
+minversion = "8.3"
+addopts = "-s --ds settings --reuse-db --disable-warnings --log-cli-level=ERROR --cache-clear"
+testpaths = ["api/tests"]
