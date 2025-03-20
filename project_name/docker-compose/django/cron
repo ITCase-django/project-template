@@ -1,4 +1,4 @@
-LOG="/var/log/cron.log"
+LOG="/project/docker-compose/django/cron.log"
 MANAGE_PY="/usr/local/bin/poetry -C /project run -- dotenv -f /project/docker-compose/django/env run -- python manage.py"
 # m h  dom mon dow   command
 0 *  * * *   $MANAGE_PY clearsessions >> $LOG 2>&1

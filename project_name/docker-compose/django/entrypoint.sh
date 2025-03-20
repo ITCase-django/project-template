@@ -13,7 +13,10 @@ wait-for-it "$DJANGO_REDIS_HOST:$DJANGO_REDIS_PORT" -t 30
 if [[ "$1" = "cron" ]]; then
     wait-for-it "$DJANGO_HOST:$DJANGO_PORT" -t 0
     >&2 echo "Django is available"
-    crontab docker-compose/django/cron && cron && tail -f /var/log/cron.log
+    touch docker-compose/django/cron.log \
+    && crontab docker-compose/django/cron \
+    && cron \
+    && tail -f docker-compose/django/cron.log
 elif [[ "$1" = "rqworker" ]]; then
     wait-for-it "$DJANGO_HOST:$DJANGO_PORT" -t 0
     >&2 echo "Django is available"

@@ -40,7 +40,7 @@ loggers = []
 # LOGGING["handlers"]["itcase_plugin"]["formatter"] = "verbose"
 # third-party
 loggers += ["rq.worker"]
-
+# set level
 for logger in loggers:
     if logger not in LOGGING["loggers"]:
         continue
